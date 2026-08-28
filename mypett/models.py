@@ -25,17 +25,7 @@ class Entry(models.Model):
 
     def __str__(self):
         """Return a string Representing the model."""
-        bar = self.text
-        if bar > 50:
-            return f"{bar[:50]}..."
-        else:
-            return bar
+        foo = self.text
+        return f"{foo[:50]}..."
         
-
-
-        # How to add if statement in django 
-        # if self.text > 50:
-        #     return foo
-        # else:
-        #     return foo 
-         
+        

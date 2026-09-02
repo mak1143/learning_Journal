@@ -1,8 +1,9 @@
-{% extends "base.html" %}
+{% extends "mypett/base.html" %}
+
+<nav><a href="{% url 'mypett:index' %}">Learning Log</a></nav>
+<nav><a href="{% url 'mypett:topic' %}">Topics</a></nav>
 
 
-<p>
-    <a href="{% url 'mypett:index' %}">Journal</a>
-</p>
-
-{% block content %} {% endblock content %}
+{% block content %}
+<h1>Learning journal <span> helps you keep track of your learning,</span> for any topic you're learning about.</h1>
+{% endblock content %}

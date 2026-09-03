@@ -1,8 +1,5 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'mypett/style.css' % }">
+{% extends "mypett/base.html" %}
 
-
-<a href="/">Journal</a>
-<h1>
-    Learning journal<span> helps you keep track of your learning,</span> for any topic you're learning about.
-</h1>
+{% block content %}
+<p>Learning journal <span> helps you keep track of your learning,</span> for any topic you're learning about.</p>
+{% endblock content %}

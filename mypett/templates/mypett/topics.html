@@ -5,7 +5,7 @@
 <h1>Topics</h1>
 <ul>
     {% for topic in topics %}
-    <li>{{ topic }}</li>
+    <li><a href="{% url 'mypett:topic' topic.id %}">{{ topic }}</a></li>
     {% empty %}
     <li>No topics has been added yet.</li>
     {% endfor %}

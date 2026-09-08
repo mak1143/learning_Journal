@@ -1,0 +1,11 @@
+{% extends "mypett/base.html" %} {% block content %}
+<p>
+  <a href="{% url 'mypett:topic' topic.id %}"> {{topic}} </a>
+</p>
+<p>Add a new entry:</p>
+<form action="{% url 'mypett:new_entry' topic.id %}" method="post">
+  {% csrf_token %} {{ form.as_p}}
+  <button type="submit" name="submit">add entry</button>
+</form>
+
+{% endblock content %}

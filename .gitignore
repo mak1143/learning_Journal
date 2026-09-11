@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+docs/
 develop-eggs/
 dist/
 downloads/
@@ -17,7 +18,7 @@ eggs/
 lib/
 lib64/
 parts/
-sdist/
+dist/
 var/
 wheels/
 share/python-wheels/
@@ -51,6 +52,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+pdf.vsix
 
 # Translations
 *.mo
@@ -150,6 +152,8 @@ activemq-data/
 *.sage.py
 
 # Environments
+.vscode/settings.json
+.playwright-mcp
 .env
 .envrc
 .venv

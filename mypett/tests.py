@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
@@ -6,11 +7,25 @@ from .models import Entry, Topic
 
 class LearningJournalViewTests(TestCase):
     def setUp(self):
-        self.topic = Topic.objects.create(text="Django")
+        self.user = User.objects.create_user(
+            username="testuser",
+            password="testpass123",
+        )
+        self.client.login(username="testuser", password="testpass123")
+        self.topic = Topic.objects.create(text="Django", owner=self.user)
         self.entry = Entry.objects.create(
             topic=self.topic,
             text="Learning Django views",
         )
+
+    def test_new_topic_is_owned_by_logged_in_user(self):
+        response = self.client.post(
+            reverse("mypett:new_topic"),
+            {"text": "Testing"},
+        )
+
+        self.assertRedirects(response, reverse("mypett:topics"))
+        self.assertTrue(Topic.objects.filter(text="Testing", owner=self.user).exists())
 
     def test_topic_page_displays_topic_and_entry(self):
         response = self.client.get(reverse("mypett:topic", args=[self.topic.id]))
@@ -71,3 +86,14 @@ class LearningJournalViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "mypett/edit_entry.html")
         self.assertContains(response, "This field is required.")
+
+    def test_other_user_cannot_edit_entry(self):
+        other_user = User.objects.create_user(
+            username="otheruser",
+            password="otherpass123",
+        )
+        self.client.force_login(other_user)
+
+        response = self.client.get(reverse("mypett:edit_entry", args=[self.entry.id]))
+
+        self.assertEqual(response.status_code, 404)

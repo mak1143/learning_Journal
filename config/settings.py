@@ -1,12 +1,14 @@
-from dotenv import load_dotenv
-from pathlib import Path
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 
-
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load .env from an explicit path so it works regardless of the server's
+# working directory (PythonAnywhere's WSGI process doesn't start in BASE_DIR).
+load_dotenv(BASE_DIR / ".env")
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -15,9 +17,16 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Dev default: True. Production (.env on the server): DJANGO_DEBUG=False
+DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
 
-ALLOWED_HOSTS = []
+# Dev default: empty list (Django allows localhost only while DEBUG=True).
+# Production (.env): DJANGO_ALLOWED_HOSTS=<your>.pythonanywhere.com
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",")
+    if host.strip()
+]
 
 # my settings
 LOGIN_URL = "users:login"
@@ -114,6 +123,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
+# Directory where `python manage.py collectstatic` gathers files for the
+# server to serve (used by PythonAnywhere's static-file mapping).
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

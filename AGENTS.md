@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Django 5.2 (Python 3.11) "Learning Journal" app — a beginner Learning-Log-style tutorial project. The Django project package is `config`; the single app is `mypett`. Managed with **uv** (no `requirements.txt`; `uv.lock` is the source of truth).
+Django 5.2 (Python 3.11) "Learning Journal" app — a beginner Learning-Log-style tutorial project. The Django project package is `config`; the single app is `mypett`. Managed with **uv** (`uv.lock` is the source of truth; `requirements.txt` exists only for the PythonAnywhere deployment and is regenerated with `uv export --format requirements-txt -o requirements.txt`).
 
 ## Commands
 

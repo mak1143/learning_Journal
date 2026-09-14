@@ -69,8 +69,11 @@ uv run python manage.py runserver
 
 Open <http://127.0.0.1:8000>, then **Register** to create your first account.
 
-> **Note:** this project ships development-only defaults (`DEBUG=True`, a
-> non-secret fallback key). It is not configured for production deployment.
+> **Note:** by default this project runs in development mode (`DEBUG=True`,
+> with a non-secret fallback key). It is deployable: on the server, `.env`
+> supplies `DJANGO_DEBUG=False`, a real `SECRET_KEY`, and
+> `DJANGO_ALLOWED_HOSTS`. See `requirements.txt`/`uv export` for the
+> pip-managed dependency list used by the host.
 
 ## Testing
 

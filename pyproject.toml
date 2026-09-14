@@ -1,7 +1,7 @@
 [project]
 name = "startup"
 version = "0.1.0"
-description = "Add your description here"
+description = "Learning Journal — a small Django journal app"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

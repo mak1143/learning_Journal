@@ -14,12 +14,8 @@
 {% endif %}
 <form method="post" action="{% url 'users:login' %}" class="form">
     {% csrf_token %}
-    {{form.as_p}}
-    {% bootsrap5_form form%}
-    {% buttons %}
+    {% bootstrap_form form %}
     <button name="submit" class="btn btn-primary">Log in</button>
-    {% endbuttons %}
-
     <input type="hidden" name="next" value="{% url 'mypett:index' %}"/>
 </form>
 
